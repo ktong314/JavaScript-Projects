@@ -1,0 +1,49 @@
+<html> 
+
+  <style>
+    #pic {
+        height: 500px;
+        width: auto;
+    }
+  </style>
+
+
+  <head>
+    <title>Photo Gallery</title> 
+  </head>
+
+  <body> 
+    <h1>Photo Gallery</h1> 
+    <h2>Colorado Trip December 2022</h2>
+    <img id = "pic">
+    <p id = "description"></p>
+    <button onclick = "prevPhoto()">Previous</button>
+    <button onclick = "nextPhoto()">Next</button>
+
+  </body>
+
+
+
+  <script>
+    const photos = ["IMG_1824.jpg", "IMG_1843.jpg", 
+    "IMG_1852.jpg", "IMG_1863.jpg", "IMG_1873.jpg",
+    "IMG_1903.jpg", "IMG_1881.jpg"];
+    let photoNum = 0;
+    document.getElementById("pic").src = photos[photoNum];
+    function prevPhoto(){
+        photoNum--;
+        if(photoNum < 0){
+            photoNum = photos.length - 1;
+        }
+        document.getElementById("pic").src = photos[photoNum];
+    }
+    function nextPhoto(){
+        photoNum++;
+        if(photoNum > photos.length - 1){
+            photoNum = 0;
+        }
+        document.getElementById("pic").src = photos[photoNum];
+    }
+  </script>
+
+</html>
