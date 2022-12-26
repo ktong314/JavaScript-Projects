@@ -18,8 +18,8 @@
     <h3 id = "number"></h3>
     <img id = "pic">
     <p id = "caption"></p>
-    <button onclick = "prevPhoto()">Previous</button>
-    <button onclick = "nextPhoto()">Next</button>
+    <button id = "prev" onclick = "prevPhoto()">Previous</button>
+    <button id = "next" onclick = "nextPhoto()">Next</button>
 
   </body>
 
@@ -35,26 +35,38 @@
     "Frozen Hair", "Zig Zag Slope at Loveland Ski Area", "Snowmobile Selfie", 
     "Family Snowmobile", "Snowmobile Solo Pic"]
     let photoNum = 0;
+    document.getElementById("prev").disabled = true;
     document.getElementById("number").innerHTML = numDisplay[photoNum];
     document.getElementById("pic").src = photos[photoNum];
     document.getElementById("caption").innerHTML = description[photoNum];
+
     function prevPhoto(){
         photoNum--;
-        if(photoNum < 0){
-            photoNum = photos.length - 1;
-        }
         document.getElementById("number").innerHTML = numDisplay[photoNum];
         document.getElementById("pic").src = photos[photoNum];
         document.getElementById("caption").innerHTML = description[photoNum];
+        checkDisable();
     }
+    
     function nextPhoto(){
         photoNum++;
-        if(photoNum > photos.length - 1){
-            photoNum = 0;
-        }
         document.getElementById("number").innerHTML = numDisplay[photoNum];
         document.getElementById("pic").src = photos[photoNum];
         document.getElementById("caption").innerHTML = description[photoNum];
+        checkDisable();
+    }
+
+    function checkDisable(){
+        if(photoNum == 0){
+            document.getElementById("prev").disabled = true;
+        }
+        else if(photoNum == photos.length - 1){
+            document.getElementById("next").disabled = true;
+        }
+        else{
+            document.getElementById("next").disabled = false;
+            document.getElementById("prev").disabled = false;
+        }
     }
   </script>
 
