@@ -15,8 +15,9 @@
   <body> 
     <h1>Photo Gallery</h1> 
     <h2>Colorado Trip December 2022</h2>
+    <h3 id = "number"></h3>
     <img id = "pic">
-    <p id = "description"></p>
+    <p id = "caption"></p>
     <button onclick = "prevPhoto()">Previous</button>
     <button onclick = "nextPhoto()">Next</button>
 
@@ -25,24 +26,35 @@
 
 
   <script>
+    const numDisplay = ["Photo 1", "Photo 2", "Photo 3",
+    "Photo 4", "Photo 5", "Photo 6", "Photo 7"];
     const photos = ["IMG_1824.jpg", "IMG_1843.jpg", 
     "IMG_1852.jpg", "IMG_1863.jpg", "IMG_1873.jpg",
     "IMG_1903.jpg", "IMG_1881.jpg"];
+    const description = ["Red Rock Ampitheater", "Outdoor Hot Tub at Dillon",
+    "Frozen Hair", "Zig Zag Slope at Loveland Ski Area", "Snowmobile Selfie", 
+    "Family Snowmobile", "Snowmobile Solo Pic"]
     let photoNum = 0;
+    document.getElementById("number").innerHTML = numDisplay[photoNum];
     document.getElementById("pic").src = photos[photoNum];
+    document.getElementById("caption").innerHTML = description[photoNum];
     function prevPhoto(){
         photoNum--;
         if(photoNum < 0){
             photoNum = photos.length - 1;
         }
+        document.getElementById("number").innerHTML = numDisplay[photoNum];
         document.getElementById("pic").src = photos[photoNum];
+        document.getElementById("caption").innerHTML = description[photoNum];
     }
     function nextPhoto(){
         photoNum++;
         if(photoNum > photos.length - 1){
             photoNum = 0;
         }
+        document.getElementById("number").innerHTML = numDisplay[photoNum];
         document.getElementById("pic").src = photos[photoNum];
+        document.getElementById("caption").innerHTML = description[photoNum];
     }
   </script>
 
