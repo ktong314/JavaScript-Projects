@@ -1,0 +1,87 @@
+<html> 
+
+  <style>
+    #expression {
+        width: 396px;
+    }
+    button{
+        width: 96px;
+        height: auto;
+    }
+  </style>
+
+
+  <head>
+    <title>Calculator</title> 
+  </head>
+
+  <body> 
+
+    <h1>Calculator</h1> 
+    <input id = "expression" type = "textbox"></input><br>
+    <button onclick = "userInput('(')">(</button>
+    <button onclick = "userInput(')')">)</button>
+    <button onclick = "userInput('%')">%</button>
+    <button onclick = "inputCommand('AC')">AC</button><br>
+    <button onclick = "userInput('1')">1</button>
+    <button onclick = "userInput('2')">2</button>
+    <button onclick = "userInput('3')">3</button>
+    <button onclick = "userInput('+')">+</button><br>
+    <button onclick = "userInput('4')">4</button>
+    <button onclick = "userInput('5')">5</button>
+    <button onclick = "userInput('6')">6</button>
+    <button onclick = "userInput('-')">-</button><br>
+    <button onclick = "userInput('7')">7</button>
+    <button onclick = "userInput('8')">8</button>
+    <button onclick = "userInput('9')">9</button>
+    <button onclick = "userInput('*')">*</button><br>
+    <button onclick = "userInput('0')">0</button>
+    <button onclick = "userInput('.')">.</button>
+    <button onclick = "inputCommand('=')">=</button>
+    <button onclick = "userInput('/')">/</button>
+
+    <h3>Previous Calculations</h3>
+    <p id = "prevCalcs"></p>
+
+  </body>
+
+
+
+  <script>
+    let setClear = 0;
+
+    function userInput(input){
+        if(setClear == 1){
+            document.getElementById("expression").value = null;
+            setClear = 0;
+        }
+        document.getElementById("expression").value += input;
+    }
+
+    function inputCommand(input){
+        switch(input){
+            case 'AC':
+                document.getElementById("expression").value = null;
+                break;
+            case '=':
+                let x = document.getElementById("expression").value;
+                let y = parse(x);
+                document.getElementById("expression").value = y;
+                let str = x + " = " + y + "<br>";
+                document.getElementById("prevCalcs").innerHTML += str ;
+                setClear = 1;
+        }
+    }
+
+    function parse(str) {
+        let res = Function(`'use strict'; return (${str})`)()
+        if(res != null){
+            return res;
+        }
+        else {
+            return "ERROR";
+        }
+    }
+  </script>
+
+</html>
