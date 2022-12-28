@@ -1,0 +1,171 @@
+<html> 
+
+  <style>
+
+    .gameButton{
+        width: 150px;
+        height: 150px;
+    }
+
+
+
+
+  </style>
+
+
+  <head>
+    <title>TicTacToe</title> 
+  </head>
+
+  <body> 
+
+    <h1>TicTacToe</h1> 
+
+    <button class = "gameButton" id = "00" onclick = "userClick(0, 0)">-</button>
+    <button class = "gameButton" id = "01" onclick = "userClick(0, 1)">-</button>
+    <button class = "gameButton" id = "02" onclick = "userClick(0, 2)">-</button><br>
+    <button class = "gameButton" id = "10" onclick = "userClick(1, 0)">-</button>
+    <button class = "gameButton" id = "11" onclick = "userClick(1, 1)">-</button>
+    <button class = "gameButton" id = "12" onclick = "userClick(1, 2)">-</button><br>
+    <button class = "gameButton" id = "20" onclick = "userClick(2, 0)">-</button>
+    <button class = "gameButton" id = "21" onclick = "userClick(2, 1)">-</button>
+    <button class = "gameButton" id = "22" onclick = "userClick(2, 2)">-</button>
+
+    <h3 id = "playerIndicator">Player 1 Turn</h3>
+
+    <p id = "test"></p>
+
+    <button id = "restart" onclick = "restart()">Restart</button>
+
+  </body>
+
+
+
+  <script>
+    const buttons = document.getElementsByClassName("gameButton");
+
+    let playerFlag = 1;
+
+
+
+    function userClick(row, column){
+        if(playerFlag == 1){
+            document.getElementById("" + row + column).innerHTML = "X";
+            document.getElementById("" + row + column).disabled = true;
+            checkTwo(row, column);
+            playerFlag = 2;
+            document.getElementById("playerIndicator").innerHTML = "Player 2 Turn";
+        }
+        else if(playerFlag == 2){
+            document.getElementById("" + row + column).innerHTML = "0";
+            document.getElementById("" + row + column).disabled = true;
+            checkTwo(row, column);
+            playerFlag = 1;
+            document.getElementById("playerIndicator").innerHTML = "Player 1 Turn";
+        }
+    }
+
+    function checkTwo(row, column){
+        const checkGrid = ["" + (row - 1) + (column - 1), "" + (row - 1) + (column), "" + (row - 1) + (column + 1),
+                           "" + (row) + (column - 1), "" + (row) + (column + 1),
+                           "" + (row + 1) + (column - 1), "" + (row + 1) + (column), "" + (row + 1) + (column + 1),]
+
+        for(let i = 0; i < checkGrid.length; i++){
+            if(document.getElementById(checkGrid[i]) != null){
+                if((playerFlag == 1) & (document.getElementById(checkGrid[i]).innerHTML == "X")){
+                    checkThree(i, row, column);
+                }
+                else if((playerFlag == 2) & (document.getElementById(checkGrid[i]).innerHTML == "0")){
+                    checkThree(i, row, column);
+                }
+            }
+        }
+        
+    
+    }
+
+    function checkThree(direction, row, column){
+        let counter1 = 0;
+        let counter2 = 0;
+        const diagCheck = ["" + (row - 2) + (column - 2), "" + (row - 1) + (column - 1), 
+                           "" + (row + 1) + (column + 1), "" + (row + 2) + (column + 2)];
+        const diagCheck2 = ["" + (row - 2) + (column + 2), "" + (row - 1) + (column + 1), 
+                            "" + (row + 1) + (column - 1), "" + (row + 2) + (column - 2)];
+        const horiCheck = ["" + (row) + (column - 2), "" + (row) + (column - 1),
+                           "" + (row) + (column + 1), "" + (row) + (column + 2)];
+        const vertCheck = ["" + (row - 2) + (column), "" + (row - 1) + (column),
+                           "" + (row + 1) + (column), "" + (row + 2) + (column)];
+        const checkWin = [diagCheck, diagCheck2, horiCheck, vertCheck];
+        switch(direction){
+            case 0:
+                direction = 0;
+                break;
+            case 1:
+                direction = 3;
+                break;
+            case 2:
+                direction = 1;
+                break;
+            case 3:
+                direction = 2;
+                break;
+            case 4:
+                direction = 2;
+                break; 
+            case 5:
+                direction = 1;
+                break;
+            case 6:
+                direction = 3;
+                break;
+            case 7:
+                direction = 0;
+                break;
+            default:
+                break;
+        }
+        for(let i = 0; i < checkWin[direction].length; i++){
+            if(document.getElementById(checkWin[direction][i]) != null){
+                if((playerFlag == 1) & (document.getElementById(checkWin[direction][i]).innerHTML == "X")){
+                    counter1++;
+                    if(counter1 == 2){
+                        playerOneWin();
+                    }
+                }
+                else if((playerFlag == 2) & (document.getElementById(checkWin[direction][i]).innerHTML == "0")){
+                    counter2++;
+                    if(counter2 == 2){
+                        playerTwoWin();
+                    }
+                }   
+        }
+        }
+
+
+
+    }
+
+    function playerOneWin(){
+        document.getElementById("test").innerHTML = "Player One Wins!";
+        disableAll()
+    }
+    function playerTwoWin(){
+        document.getElementById("test").innerHTML = "Player Two Wins!";
+        disableAll();
+    }
+
+    function disableAll(){
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = true;
+        }   
+    }
+
+    function restart(){
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].innerHTML = "-";
+            buttons[i].disabled = false;
+        }
+    }
+  </script>
+
+</html>
