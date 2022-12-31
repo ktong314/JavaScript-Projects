@@ -1,0 +1,34 @@
+
+
+.input {
+    display: flex;
+}
+
+
+#task {
+    height: 50px;
+    width: 500px;
+}
+
+#plus {
+    height: 50px;
+    width: 50px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    height: 50px;
+    width: 100px;
+}
+
+.dropdown-content {
+    display: none;
+}
+
+.show {
+    display: block;
+}

@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="TodoList.css">
+    </head>
+    <body>
+        <script src = "TodoList.js"></script>
+
+
+        <title>To Do List</title>
+        <h1>To Do List</h1>
+
+
+        <div class = "input">
+            <input id = "task" type = "textbox"></input>
+            <button onclick = "addTask()" id = "plus">➕</button>
+
+            <div class="dropdown">
+                <button onclick="showDropdown()" class="dropbtn">Filter ⬇️</button>
+                <a id = "filtered"></a>
+                <div id="myDropdown" class="dropdown-content">
+                  <option onclick = "showCompleted()">Complete</option>
+                  <option onclick = "showIncomplete()">Incomplete</option>
+                  <option onclick = "showAll()">All</option>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <table id = "list">
+                <tr>
+                    <th>Task</th>
+                    <th>Done</th>
+                    <th>Trash</th>
+                </tr>
+            </table>
+            <p id = "demo"></p>
+        </div>
+
+
+        
+
+
+
+    </body>
+</html>
